@@ -16,7 +16,7 @@ Port scanning is the first step in almost every network security assessment and 
 
 - **Incident response and threat hunting** - When investigating a breach, you scan internal networks to find backdoors, C2 channels, or lateral movement artifacts. Attackers often open non-standard ports for persistence.
 
-## What You'll Learn
+## learned skills
 
 This project teaches you how network reconnaissance works at the TCP layer. By building it yourself, you'll understand:
 
@@ -73,7 +73,7 @@ Before starting, you should understand:
 Get the project running locally:
 ```bash
 # Clone and navigate
-cd PROJECTS/beginner/simple-port-scanner
+cd simple-port-scanner
 
 # Create build directory
 mkdir build && cd build
@@ -94,23 +94,20 @@ Expected output: A table showing port number, state (OPEN/CLOSED/FILTERED), serv
 ## Project Structure
 ```
 simple-port-scanner/
-├── src/
-│   ├── PortScanner.hpp      # Class definition, member variables, method signatures
-│   └── PortScanner.cpp      # Core scanning logic, async operations, banner grabbing
-├── main.cpp                 # Entry point, CLI argument parsing with boost::program_options
-└── CMakeLists.txt           # Build configuration, dependencies (Boost)
+├── CMakeLists.txt # Build configuration and dependency management (Boost)
+├── README.md # Project overview, build & usage instructions
+├── docs/ # Technical documentation
+│ ├── 00-OVERVIEW.md # High-level project goals and context
+│ ├── 01-ARCHITECTURE.md # Design decisions and system structure
+│ └── 02-IMPLEMENTATION.md# Core implementation details
+├── include/ # Public headers
+│ └── PortScanner.hpp # Class definition and public interface
+└── src/ # Source implementation
+├── PortScanner.cpp # Asynchronous scanning logic and networking
+└── main.cpp # Entry point and CLI parsing (Boost.Program_options)
+
+
 ```
-
-## Next Steps
-
-1. **Understand the concepts** - Read [01-CONCEPTS.md](./01-CONCEPTS.md) to learn about TCP port states, banner grabbing, and network reconnaissance techniques.
-
-2. **Study the architecture** - Read [02-ARCHITECTURE.md](./02-ARCHITECTURE.md) to see how async I/O and concurrent scanning are designed.
-
-3. **Walk through the code** - Read [03-IMPLEMENTATION.md](./03-IMPLEMENTATION.md) for a detailed explanation of the scanning algorithm and async patterns.
-
-4. **Extend the project** - Read [04-CHALLENGES.md](./04-CHALLENGES.md) for ideas like UDP scanning, OS fingerprinting, and stealth techniques.
-
 ## Common Issues
 
 **"boost/asio.hpp: No such file or directory"**
@@ -130,9 +127,3 @@ Solution: This is normal if scanning a machine with no services running. Try sca
 **Scanner hangs or runs very slowly**
 Solution: Your firewall might be rate-limiting you. Reduce the thread count (`-t 10` instead of default 100) and increase timeout (`-e 5`). Also ensure you're not scanning from a network that blocks outbound connections.
 
-## Related Projects
-
-If you found this interesting, check out:
-
-- **packet-sniffer** - Captures and analyzes raw network packets. Port scanning makes more sense when you can see the SYN/ACK exchanges.
-- **basic-firewall** - Implements rules to block port scans. Understanding both sides (scanning and blocking) gives you complete network security perspective.
