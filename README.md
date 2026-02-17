@@ -7,6 +7,13 @@
 
 An asynchronous TCP port scanner implemented in C++ using boost::asio
 
+## What It Does
+
+- Asynchronous TCP port scanning using Boost.Asio for high concurrency
+- Configurable port ranges from single ports to full 65535 scans
+- Adjustable concurrency level to control scan speed and network load
+- Connection timeout configuration to handle filtered ports gracefully
+- Clean terminal output showing open, closed, and filtered port states
 ## Features
 - Configurable port ranges (e.g. 1-1024, 1-65535)
 - Adjustable concurrency level
