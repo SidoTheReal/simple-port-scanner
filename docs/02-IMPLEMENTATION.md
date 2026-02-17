@@ -5,11 +5,17 @@ This document walks through the actual code, explaining how asynchronous port sc
 ## File Structure Walkthrough
 ```
 simple-port-scanner/
-├── src/
-│   ├── PortScanner.hpp     # Class definition: member variables, async I/O primitives, method signatures
-│   └── PortScanner.cpp     # Implementation: async scan logic, completion handlers, banner grabbing
-├── main.cpp                # Entry point: CLI parsing, scanner initialization, blocking run() call
-└── CMakeLists.txt          # Build config: C++20 standard, Boost dependency with program_options
+├── CMakeLists.txt # Build configuration and dependency management (Boost)
+├── README.md # Project overview, build & usage instructions
+├── docs/ # Technical documentation
+│ ├── 00-OVERVIEW.md # High-level project goals and context
+│ ├── 01-ARCHITECTURE.md # Design decisions and system structure
+│ └── 02-IMPLEMENTATION.md# Core implementation details
+├── include/ # Public headers
+│ └── PortScanner.hpp # Class definition and public interface
+└── src/ # Source implementation
+├── PortScanner.cpp # Asynchronous scanning logic and networking
+└── main.cpp # Entry point and CLI parsing (Boost.Program_options)
 ```
 
 ## Building the CLI Interface
@@ -743,12 +749,3 @@ Key differences from dev:
 - Debug symbols stripped (smaller binary)
 - Assertions disabled (no runtime checks)
 
-## Next Steps
-
-You've seen how async I/O, concurrent scanning, and state detection work. Now:
-
-1. **Try the challenges** - [04-CHALLENGES.md](./04-CHALLENGES.md) has extension ideas like SYN scanning, service version detection, and output formats.
-
-2. **Modify concurrency** - Change `MAX_THREADS` to 1 and observe serial scanning (slow). Change to 1000 and watch resource usage spike. Find the sweet spot for your network.
-
-3. **Compare with Nmap** - Run `nmap -sT scanme.nmap.org` (TCP connect scan, same as ours) and compare results. Nmap has decades of edge case handling we don't.
