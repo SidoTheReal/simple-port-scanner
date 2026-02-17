@@ -461,10 +461,3 @@ Fits naturally with async completion handlers. When a scan finishes, the complet
 - Pros: Minimal code, no manual thread management, automatic work distribution
 - Cons: Stack depth increases (though tail call optimization helps), less control over worker lifecycle, harder to implement advanced scheduling
 
-## Next Steps
-
-Now that you understand the architecture:
-
-1. Read [03-IMPLEMENTATION.md](./03-IMPLEMENTATION.md) for detailed code walkthrough showing how async operations coordinate
-2. Try modifying the concurrency model - what happens if you remove the strand? (Race conditions will corrupt counters)
-3. Experiment with timeout values to see how network latency affects scan duration
